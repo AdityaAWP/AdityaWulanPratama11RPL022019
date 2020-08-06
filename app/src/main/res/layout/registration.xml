@@ -21,7 +21,7 @@
         android:layout_marginVertical="20dp"
         android:textStyle="bold"
         android:textColor="#332C61"
-        android:text="Log in"
+        android:text="Sign Up"
         android:layout_height="wrap_content">
 
     </TextView>
@@ -30,10 +30,21 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:padding="15dp"
+        android:layout_marginVertical="20dp"
         android:inputType="textEmailAddress"
-        android:hint="Username"
+        android:hint="Your Username"
         android:background="@drawable/et_custom"
         android:textSize="15sp" />
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:padding="15dp"
+        android:inputType="textEmailAddress"
+        android:hint="Your Email"
+        android:background="@drawable/et_custom"
+        android:textSize="15sp" />
+
     <EditText
         android:layout_marginVertical="20dp"
         android:id="@+id/password"
@@ -44,6 +55,15 @@
         android:hint="Password"
         android:background="@drawable/et_custom"
         android:textSize="15sp" />
+    <EditText
+        android:id="@+id/retype"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:padding="15dp"
+        android:inputType=""
+        android:hint="Re-type Password"
+        android:background="@drawable/et_custom"
+        android:textSize="15sp" />
 
     <Button
         android:layout_width="match_parent"
@@ -51,11 +71,12 @@
         android:textColor="#ffff"
         android:layout_marginTop="50dp"
         android:background="@drawable/btn_custom"
-        android:text="Enter"></Button>
+        android:text="Log in"></Button>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_marginTop="20dp"
-        android:text="Forgot Password?"
+        android:text="Have Account ?"
         android:gravity="center"
         android:layout_height="wrap_content"></TextView>
 

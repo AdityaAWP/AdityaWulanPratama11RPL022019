@@ -39,10 +39,6 @@
                     android:text="Lihat Product"
                     android:textColor="#000000"
                     tools:targetApi="lollipop" />
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:background="@mipmap/nikeshoes"
-                    android:layout_height="match_parent"/>
 
             </RelativeLayout>
 
@@ -88,5 +84,10 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/tvmenu"
+        android:text="Go to Menu 2"
+        android:layout_height="match_parent"></TextView>
 
 </LinearLayout>

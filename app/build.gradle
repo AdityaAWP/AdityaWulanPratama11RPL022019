@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.1"
@@ -28,6 +29,7 @@ repositories {
 }
 
 dependencies {
+    apply plugin: 'realm-android'
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     implementation 'com.amitshekhar.android:android-networking:1.0.2'

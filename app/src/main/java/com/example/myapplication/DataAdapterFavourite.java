@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -18,12 +20,18 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 public class DataAdapterFavourite extends RecyclerView.Adapter<DataAdapterFavourite.DatakuViewHolder> {
-    private ArrayList<MovieModel> dataList;
+    private List<MovieModel> dataList;
     private Callback callback;
     View viewku;
     int posku;
+    Realm realm;
+    RealmHelper realmHelper;
 
     interface Callback {
         void onClick(int position);
@@ -31,10 +39,13 @@ public class DataAdapterFavourite extends RecyclerView.Adapter<DataAdapterFavour
     }
 
 
-    public DataAdapterFavourite(ArrayList<MovieModel> dataList, Callback callback) {
+    public DataAdapterFavourite(List<MovieModel> dataList, Callback callback) {
         this.callback = callback;
         this.dataList = dataList;
         Log.d("makanan", "MahasiswaAdapter: "+dataList.size()+"");
+        RealmConfiguration configuration = new RealmConfiguration.Builder().build();
+        realm = Realm.getInstance(configuration);
+        realmHelper = new RealmHelper(realm);
     }
 
     @Override
@@ -108,6 +119,26 @@ public class DataAdapterFavourite extends RecyclerView.Adapter<DataAdapterFavour
 
                 case 2:
                     //Do stuff
+                    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch (which){
+                                case DialogInterface.BUTTON_POSITIVE:
+                                    //Yes button clicked
+                                    realmHelper.delete(dataList.get(posku).getId());
+                                    notifyDataSetChanged();
+                                    break;
+
+                                case DialogInterface.BUTTON_NEGATIVE:
+                                    //No button clicked
+                                    break;
+                            }
+                        }
+                    };
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(viewku.getContext());
+                    builder.setMessage("Are you sure want to delete ?").setPositiveButton("Yes", dialogClickListener)
+                            .setNegativeButton("No", dialogClickListener).show();
 
                     break;
             }

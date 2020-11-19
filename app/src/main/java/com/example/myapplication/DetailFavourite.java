@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.Target;
@@ -15,7 +14,7 @@ import com.bumptech.glide.request.target.Target;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
-public class DetailMovie extends AppCompatActivity {
+public class DetailFavourite extends AppCompatActivity {
     Realm realm;
     RealmHelper realmHelper;
     MovieModel movieModel;
@@ -31,18 +30,17 @@ public class DetailMovie extends AppCompatActivity {
     TextView tvjudul;
     ImageView ivposter;
     TextView tvdesc;
-    Button btnfavorite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_movie);
+        setContentView(R.layout.activity_detail_favourite);
         extras = getIntent().getExtras();
         tvjudul = (TextView)findViewById(R.id.tvjudul);
         tvdesc = (TextView)findViewById(R.id.txtdeskripsi);
         ivposter = (ImageView) findViewById(R.id.ivposter);
 
-        btnfavorite = (Button) findViewById(R.id.btnfavorite);
+
         if (extras != null) {
             title = extras.getString("judul");
             date = extras.getString("date");
@@ -50,33 +48,19 @@ public class DetailMovie extends AppCompatActivity {
             path = extras.getString("path");
             tvjudul.setText(title);
             tvdesc.setText(deskripsi);
-            Glide.with(DetailMovie.this)
+            Glide.with(DetailFavourite.this)
                     .load(path)
                     .override(Target.SIZE_ORIGINAL)
                     .placeholder(R.mipmap.ic_launcher)
                     .into(ivposter);
             // and get whatever type user account id is
         }
-        Realm.init(DetailMovie.this);
+        Realm.init(DetailFavourite.this);
         RealmConfiguration configuration = new RealmConfiguration.Builder().build();
         realm = Realm.getInstance(configuration);
 
 
-        btnfavorite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                movieModel = new MovieModel();
-                movieModel.setDesc(deskripsi);
-                movieModel.setJudul(title);
-                movieModel.setPath(path);
-                movieModel.setReleaseDate(date);
 
-                realmHelper = new RealmHelper(realm);
-                realmHelper.save(movieModel);
-                Toast.makeText(DetailMovie.this, "Success Add To Favourite", Toast.LENGTH_SHORT).show();
-
-            }
-        });
 
     }
 }

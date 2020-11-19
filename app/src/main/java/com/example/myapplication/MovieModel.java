@@ -6,10 +6,19 @@ import io.realm.annotations.PrimaryKey;
 public class MovieModel extends RealmObject {
     @PrimaryKey
     private Integer id;
+
     private String judul;
     private String desc;
     private String releaseDate;
     private String path;
+
+    public MovieModel(String original_title) {
+
+    }
+
+    public MovieModel() {
+
+    }
 
     public Integer getId() {
         return id;
@@ -50,5 +59,6 @@ public class MovieModel extends RealmObject {
     public void setPath(String path) {
         this.path = path;
     }
+
 
 }
